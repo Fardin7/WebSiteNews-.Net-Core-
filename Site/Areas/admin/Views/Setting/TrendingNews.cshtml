@@ -1,0 +1,146 @@
+﻿@model IEnumerable<Model.News>
+
+@{
+    ViewBag.Title = "TrendingNews";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- DataTables -->
+
+@section css{
+    <link rel="stylesheet" href="~/PanelFile/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+
+
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+
+
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.KeyWord)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PublishDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsActive)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsTrend)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int counter = 0;var classtype = "";var value = "";}
+                            @foreach (var item in Model)
+                            {
+                                if (!item.IsTrend)
+                                {
+                                    classtype = "btn-success";
+                                    value = "trending";
+                                }
+                                else
+                                {
+                                    classtype = "btn-danger";
+                                    value = "trended";
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.RouteLink(item.Title, "news", new { id = item.Title })
+
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.KeyWord)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PublishDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsActive)
+                                    </td>
+
+                                    <td>
+
+                                        <input type="button" class="@classtype"  id="@item.Id"  value="@value" onclick="setttrend('@item.Id')" />
+
+                                    </td>
+                                </tr>
+                                counter++;
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.KeyWord)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PublishDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsActive)
+                                </th>
+
+                                <td>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+@section scripts{
+
+        <script src="~/Scripts/CustomJs/TrendingNews.js"></script>
+
+    <!-- DataTables -->
+    <script src="~/PanelFile/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/PanelFile/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+    <!-- page script -->
+    <script>
+        $(function () {
+            $("#example1").DataTable();
+            //$('#example2').DataTable({
+            //    "paging": true,
+            //    "lengthChange": false,
+            //    "searching": false,
+            //    "ordering": true,
+            //    "info": true,
+            //    "autoWidth": false,
+            //});
+        });</script>
+
+
+}
+
+

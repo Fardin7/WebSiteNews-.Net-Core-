@@ -1,0 +1,12 @@
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\obj\Debug\net5.0\Enums.csproj.AssemblyReference.cache
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\obj\Debug\net5.0\Enums.GeneratedMSBuildEditorConfig.editorconfig
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\obj\Debug\net5.0\Enums.AssemblyInfoInputs.cache
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\obj\Debug\net5.0\Enums.AssemblyInfo.cs
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\obj\Debug\net5.0\Enums.csproj.CoreCompileInputs.cache
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\bin\Debug\net5.0\Enums.deps.json
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\bin\Debug\net5.0\Enums.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\bin\Debug\net5.0\ref\Enums.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\bin\Debug\net5.0\Enums.pdb
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\obj\Debug\net5.0\Enums.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\obj\Debug\net5.0\ref\Enums.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Enums\obj\Debug\net5.0\Enums.pdb

@@ -1,0 +1,421 @@
+﻿@model Model.News
+@using Business
+@using System.Threading
+<section class="content" style=" direction: rtl;text-align: initial;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-info">
+                <div class="card-header">
+                    @*<h3 class="card-title">
+                            Bootstrap WYSIHTML5
+                            <small>Simple and fast</small>
+                        </h3>*@
+                    <!-- tools box -->
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
+                                title="Remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <!-- /. tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body pad">
+                    <div class="mb-3">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "editform" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.HiddenFor(model => model.Id)
+                                @Html.HiddenFor(model => model.NewsFiles.FirstOrDefault().Name)
+
+                                @*<h4>News</h4>
+                                    <hr />*@
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="col-md-10">
+
+                                        <fieldset id="group1">
+
+                                            @{ int counter = 1;}
+                                            @foreach (var item in Enum.GetNames(typeof(NewsType)))
+                                            {
+                                                var selectradio = "";
+                                                var enumvalue = (int)Enum.Parse(typeof(NewsType), item);
+                                                if (enumvalue == Model.NewsType)
+                                                {
+                                                    selectradio = "checked";
+                                                }
+                                                var intputid = "customRadio" + counter;
+                                                <div class="custom-control custom-radio">
+                                                    <input class="custom-control-input" type="radio" value="@enumvalue" id="@intputid" name="NewsType" @selectradio>
+                                                    <label for="@intputid" class="custom-control-label">@Resource.Resource.ResourceManager.GetString(item, Thread.CurrentThread.CurrentUICulture)</label>
+                                                </div>
+                                                counter++;
+                                            }
+
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @* @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "عنوان", style = "direction:rtl;" } })
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @*@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-10">
+                                        @*<textarea class="textarea" name="Description" placeholder="place some text here"
+                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>*@
+                                        <textarea cols="20" data-val="true" data-val-required="The Description field is required." class=form-control, placeholder=خلاصه style='width:100%;height:100px;' id="Description" name="Description" rows="2">@Model.Description</textarea>
+                                        @* @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "خلاصه", style = "width:100%;" } })*@
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @*  @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-10">
+                                        <textarea class="textarea" name="Body" placeholder="place some text here"
+                                                  style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">@Html.Raw(Model.Body)</textarea>
+
+                                        @* @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "textarea", placeholder = "Place some text here", style = "width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" } })*@
+                                        @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.KeyWord, "کلمات کلیدی", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.KeyWord, new { htmlAttributes = new { @class = "form-control", id = "tags", placeholder = "کلمات کلیدی" } })
+                                        @Html.ValidationMessageFor(model => model.KeyWord, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IsActive, "انتشار", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.IsActive)
+                                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @*<input type='text' class="form-control" id='datetimepicker4' />*@
+                                        <input type="text" name="PublishDate" placeholder="تاریخ انتشار" style="direction:rtl;width:100%;" id="filter-date">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="col-md-10">
+                                        <div class="input-group-prepend">
+                                            @Html.DropDownList("CategoryId", null, "---دسته بندی---", htmlAttributes: new { @class = "form-control", onchange = "selectsub(this,'SubcategoryId','SubcategoryCrt','CategoryId')", style = "border-radius:0px;" })
+                                            @Html.ValidationMessageFor(model => model.Subcategory.CategoryId, "", new { @class = "text-danger" })
+
+                                            @* <button type="button" controller-name="Categories" dropdown-id="CategoryId" id="CategoryCrt" style="width:20%; " class="btn btn-block bg-gradient-primary btn-flat">ایجاد</button>*@
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <div class="input-group-prepend">
+                                            @Html.DropDownList("SubcategoryId", null, "---دسته بندی---", htmlAttributes: new { style = "width:100%" })
+
+                                            @*<select id="SubcategoryId" name="SubcategoryId"  class="form-control">
+                                                </select>*@
+                                            @* <button type="button" id="SubcategoryCrt" data-name="CategoryId" data-id="@Model.Subcategory.CategoryId" controller-name="Subcategories" dropdown-id="SubcategoryId" style="width:20%;" class="btn btn-block bg-gradient-primary btn-flat">ایجاد</button>*@
+
+                                            @Html.ValidationMessageFor(model => model.SubcategoryId, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @* @Html.LabelFor(model => model.Subcategory.CategoryId, "دسته بندی", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-10">
+                                        <div class="input-group-prepend">
+
+                                            @Html.DropDownList("NewsCategoryId", null, "---نوع خبر---", htmlAttributes: new { @class = "form-control", onchange = "selectsub(this,'NewsSubcategoryId','NewsSubcategoryCrt','NewsCategoryId')" })
+                                            @Html.ValidationMessageFor(model => model.NewsSubCategory.NewsCategoryId, "", new { @class = "text-danger" })
+                                            @* <button type="button" id="NewsCategoryCrt" controller-name="NewsCategories" dropdown-id="NewsCategoryId" style="width:20%;" class="btn btn-block bg-gradient-primary btn-flat">ایجاد</button>*@
+                                        </div>
+                                    </div>
+                                    @*data-id="@Model.NewsSubcategoryId"*@
+                                </div>
+                                <div class="form-group">
+                                    @* @Html.LabelFor(model => model.NewsSubcategoryId, "نوع خبر", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-10">
+                                        <div class="input-group-prepend">
+                                            @Html.DropDownList("NewsSubcategoryId", null, "---نوع خبر---", htmlAttributes: new { style = "width:100%" })
+
+                                            @*<select id="NewsSubcategoryId" name="NewsSubcategoryId" class="form-control">
+                                                </select>*@
+                                            @* <button type="button" data-name="NewsCategoryId" data-id="@Model.NewsSubCategory.NewsCategoryId" id="NewsSubcategoryCrt" controller-name="NewsSubCategories" dropdown-id="NewsSubcategoryId" style="width:20%;" class="btn btn-block bg-gradient-primary btn-flat">ایجاد</button>*@
+
+                                            @Html.ValidationMessageFor(model => model.NewsSubcategoryId, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="card card-secondary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Bootstrap Switch</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch>
+                                            <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                        </div>
+                                    </div>*@
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        @{string fileName = null;}
+                                        @if (Model.NewsFiles.Count > 0)
+                                        {
+                                            fileName = Model.NewsFiles.FirstOrDefault().Name;
+                                        }
+                                        <input name="NewsFileAddress" value="@fileName" type="hidden" id="NewsFileAddress" />
+                                        <img id="waitinggifid" style="width:20px;height:20px; visibility:hidden" src="~/PanelFile/gifs/Waiting-GIF-Image-for-Whatsapp-and-Facebook-23-1.gif" />
+                                        <input name="NewsFile" type="file" id="selectfile1" onchange="AJAXSubmit(this,'waitinggifid','/admin/News/SaveNewFile','NewsFileAddress','filedownloadlink')" />
+                                    </div>
+                                    <div id="uploadfileholder">
+                                        @if (Model.NewsFiles.Count > 0)
+                                        {
+                                            <a href="~/News/GenerateFile/?filename=@Model.NewsFiles.FirstOrDefault().Name" id="filedownloadlink">
+                                                @Model.NewsFiles.FirstOrDefault().Name
+                                            </a>
+                                            <img src="~/PanelFile/Icons/deletefileicon.png" style="width:25px;" onclick="DeleteNewsFile('@Model.NewsFiles.FirstOrDefault().Name', '@Model.NewsFiles.FirstOrDefault().Id')" id="deletefile" />
+                                        }
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <div id="uploadfileholder">
+                                        <img src="@Model.ImageAddress" id="newsimage" style="width:150px;height:150px;" />
+                                    </div>
+                                    <div class="col-md-offset-2 col-md-10" style="margin-top:20px;">
+                                        @Html.HiddenFor(q => q.ImageAddress)
+                                        <img id="newswaitinggifid" style="width:20px;height:20px; visibility:hidden" src="~/PanelFile/gifs/Waiting-GIF-Image-for-Whatsapp-and-Facebook-23-1.gif" />
+                                        <input name="NewsImage" type="file" id="selectfile" onchange="AJAXSubmit(this,'newswaitinggifid','/admin/News/SaveImage','ImageAddress','newsimage')" />
+                                    </div>
+
+                                </div>
+                                <div class="form-group" style="text-align: center;">
+
+
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="button" value="درج" id="submiteditform" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                    @*<p class="text-sm mb-0">
+                            Editor <a href="https://github.com/bootstrap-wysiwyg/bootstrap3-wysiwyg">
+                                Documentation and license
+                                information.
+                            </a>
+                        </p>*@
+                </div>
+            </div>
+        </div>
+        <!-- /.col-->
+    </div>
+    <!-- ./row -->
+</section>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<h5 class="modal-title" id="exampleModalLabel">New message</h5>*@
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: right; direction: rtl;">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+                <input type="button" id="submitbtn" class="btn btn-primary" value="ایجاد" />
+            </div>
+        </div>
+    </div>
+</div>
+@section css{
+    <link rel="stylesheet" href="~/PanelFile/plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="~/Content/taginput/css/inputTags.css">
+    <link rel="stylesheet" type="text/css" href="~/datepicker/datetimepicker-master/jquery.datetimepicker.css" />
+    <link rel="stylesheet" href="~/PanelFile/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    @*<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+
+        rel="stylesheet">*@
+
+    @*<link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />*@
+    <style>
+        select {
+            direction: rtl;
+        }
+
+        #deletefile {
+            cursor: pointer;
+        }
+    </style>
+
+}
+@section scripts{
+
+    <script src="~/PanelFile/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="~/Scripts/taginput/js/inputTags.jquery.js"></script>
+    <script src="~/datepicker/datetimepicker-master/build/jquery.datetimepicker.full.js"></script>
+    <script src="~/PanelFile/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script>
+        $("input[data-bootstrap-switch]").each(function () {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+    </script>
+
+    <script>
+        /*jslint browser:true*/
+        /*global jQuery, document*/
+
+        jQuery(document).ready(function () {
+            'use strict';
+
+            jQuery('#filter-date').datetimepicker({
+                //onGenerate: function (ct) {
+                //    var d = $('#filter-date').datetimepicker('getValue');
+                //    alert(d);
+
+                //},
+
+
+            });
+        });
+        //
+        //console.log(d.getFullYear());
+    </script>
+    <script>
+
+    </script>
+    <script>
+        $(function () {
+            // Summernote
+            $('.textarea').summernote()
+        })
+
+        $('#tags').inputTags({
+            //init: function ($elem) {
+            //    alert($elem)
+            //},
+            //create: function () {
+            //    alert($elem)
+            //},
+            //update: function () {
+            //    alert()
+            //},
+            //destroy: function () {
+            //    alert($elem)
+            //},
+            //selected: function () {
+            //    alert($elem)
+            //},
+            //unselected: function () {
+            //    alert($elem)
+            //},
+            change: function () {
+                console.log(this.tags)
+
+            },
+            autocomplete: {
+                values: ['jQuery', 'JavaScript']
+            },
+            // an array of tags
+            tags: [],
+            keys: [],
+
+            // for tags validation
+            minLength: 2,
+            maxLength: 30,
+            max: 8,
+
+            // Events
+            //init: false,
+            //create: true,
+
+            //destroy: false,
+            //focus: false,
+            //selected: false,
+            //unselected: false,
+            //change: false,
+
+            // editable
+            editable: true,
+
+            // for autocomplete list
+
+
+            // custom error messages
+            errors: {
+                empty: 'Attention, vous ne pouvez pas ajouter un tag vide.',
+                minLength: 'Attention, votre tag doit avoir au minimum %s caractères.',
+                maxLength: 'Attention, votre tag ne doit pas dépasser %s caractères.',
+                max: 'Attention, le nombre de tags ne doit pas dépasser %s.',
+                exists: 'Attention, ce tag existe déjà !',
+                autocomplete_only: 'Attention, vous devez sélectionner une valeur dans la liste.',
+                timeout: 8000
+            }
+
+        });
+        $(".inputTags-field").keydown(function () {
+
+            return (event.keyCode != 13);
+        });
+    </script>
+    @*<script>
+                $('#tags').inputTags({
+          init: function($elem) {
+            console.log('Event called on plugin init', $elem);
+          },
+          create: function() {
+            console.log('Event called when an item is created');
+          },
+          update: function() {
+            console.log('Event called when an item is updated');
+          },
+          destroy: function() {
+            console.log('Event called when an item is deleted');
+          },
+          selected: function() {
+            console.log('Event called when an item is selected');
+          },
+          unselected: function() {
+            console.log('Event called when an item is unselected');
+          },
+          change: function($elem) {
+            console.log('Event called on item change', $elem);
+          }
+        });
+            </script>*@
+
+    <script src="~/Scripts/CustomJs/DropDownList.js"></script>
+    @* <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+
+}

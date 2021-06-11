@@ -1,0 +1,13 @@
+[
+  {
+    "outputFileName": "~/bundles/jqueryval",
+    "inputFiles": [
+      "~/Scripts/jquery.validate*"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

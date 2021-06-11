@@ -1,0 +1,19 @@
+w _references.js
+ELMAH
+ deferred execution
+IQueryable supports custom query using CreateQuery and Execute methods
+expression tree
+Dispose
+mocking 
+esting/Mocking with EF6: 
+TDD developer
+NoTracking 
+ExecuteSqlCommand() and SqlQuery() 	
+
+ POCO class
+why the properties are virtual 
+boilerplate
+
+ChildActionOnlyAttribute
+all type of authentication
+ log error information

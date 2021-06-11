@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Model.NewsCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts{
+
+    <script src="~/Scripts/CustomJs/NewsCategory.js"></script>
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="NewsCategorytable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                <button onclick='deleteNewsCategory(@item.Id)'>حذف</button>
+            </td>
+        </tr>
+    }
+
+</table>

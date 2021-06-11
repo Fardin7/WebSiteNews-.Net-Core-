@@ -1,0 +1,77 @@
+﻿@model Model.Subcategory
+
+@{
+    ViewBag.Title = "Create";
+}
+    @section scripts{
+
+        <script src="~/Scripts/CustomJs/SubCategory.js"></script>
+    }
+
+@using (Html.BeginForm("Create", "NewsSubCategories", FormMethod.Post, new { id = "NewsSubcategoriesfrm" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @* @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "عنوان" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsActive, "فعال", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.IsActive)
+                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryId, "CategoryId" ,htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryId", null, "----انتخاب کنید----",htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SubcategoryId, "SubcategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("SubcategoryId", null,"----انتخاب کنید----" ,htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SubcategoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.HiddenFor(q => q.ImageAddress)
+            <img id="newswaitinggifid" style="width:20px;height:20px; visibility:hidden" src="~/PanelFile/gifs/Waiting-GIF-Image-for-Whatsapp-and-Facebook-23-1.gif" />
+            <input name="NewsImage" type="file" id="selectfile" onchange="AJAXSubmit(this,'newswaitinggifid','/admin/SubCategories/SaveImage')" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" id="subcategorysubmitbtn" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+
+</div>
+}
+<table class="table" id="Subcategoriestable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageAddress)
+        </th>
+        <th></th>
+    </tr>
+</table>

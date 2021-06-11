@@ -1,0 +1,17 @@
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\bin\Debug\net5.0\Resource.deps.json
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\bin\Debug\net5.0\Resource.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\bin\Debug\net5.0\ref\Resource.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\bin\Debug\net5.0\Resource.pdb
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\bin\Debug\net5.0\fa-IR\Resource.resources.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.csproj.AssemblyReference.cache
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.Resource.resources
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.Resource.fa-IR.resources
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.csproj.GenerateResource.cache
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.GeneratedMSBuildEditorConfig.editorconfig
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.AssemblyInfoInputs.cache
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.AssemblyInfo.cs
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.csproj.CoreCompileInputs.cache
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\fa-IR\Resource.resources.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\ref\Resource.dll
+D:\WebSiteNews(Core)\WebSiteNews(Core)\Resource\obj\Debug\net5.0\Resource.pdb
